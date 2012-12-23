@@ -3,6 +3,16 @@
 from itertools import izip
 import random
 
+__all__ = [
+    'Board',
+    'main_loop',
+    'GameOver',
+    'EMPTY',
+    'BLACK',
+    'WHITE',
+    'find_turnable_points',
+    ]
+
 EMPTY = 0
 BLACK = 1
 WHITE = 2
@@ -176,33 +186,3 @@ def main_loop(board):
             print 'computer put (%d, %d).' % (col + 1, row + 1)
             board.put(row, col, piece)
             board.update(row, col, piece)
-
-def main():
-    board = Board()
-    try:
-        while True:
-            main_loop(board)
-    except GameOver, go:
-        if go.status == GameOver.CANNOT_PUT:
-            if go.looser == 'human':
-                print u'＼(^o^)／'
-            else:
-                print 'you win!'
-        elif go.status == GameOver.COMPLETE:
-            human = 0
-            for row, col in iter_points():
-                if board.get(row, col) == BLACK:
-                    human += 1
-            all_count = 8 * 8
-            print 'Result human:%d computer:%d' % (human, all_count - human)
-            if human > all_count // 2:
-                print 'you win!'
-            elif human == half // 2:
-                print 'draw...'
-            else:
-                print u'＼(^o^)／'
-        else:
-            assert False
-
-if __name__ == '__main__':
-    main()

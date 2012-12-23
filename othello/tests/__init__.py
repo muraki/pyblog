@@ -19,6 +19,7 @@ class TestBoard:
 
 def test_find_turnable_points():
     board = Board()
-    print find_turnable_points(board, BLACK)
-
-test_find_turnable_points()
+    assert list(find_turnable_points(board, BLACK)) \
+        == [(2, 4), (3, 5), (4, 2), (5, 3)]
+    assert list(find_turnable_points(board, WHITE)) \
+        == [(2, 4), (3, 5), (4, 2), (5, 3)]
